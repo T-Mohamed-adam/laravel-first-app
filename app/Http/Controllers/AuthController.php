@@ -9,6 +9,9 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 
 class AuthController extends Controller
 {
+    public function show(){
+        return User::all();
+    }
     public function register(Request $request)
     {
         $fields = $request->validate(
@@ -35,9 +38,9 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         auth()->user()->tokens()->delete();
-        return [
+        return response([
             'mesaage' => 'Logged out'
-        ];
+        ]);
     }
 
     public function login(Request $request)
